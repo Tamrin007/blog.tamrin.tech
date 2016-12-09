@@ -2,7 +2,10 @@
 title = "About me"
 draft = false
 date = "2016-12-07T22:36:40+09:00"
-
+categories = ["Self introduction"]
+tags = ["Self introduction"]
+thumbnailImage = "images/2016/12/07/avatar.png"
+thumbnailImagePosition = "right"
 +++
 
 ## 初めまして Tamrin007 です。
