@@ -20,6 +20,7 @@ DisqusShortname = "tamrin-tech"
 # googleAnalytics = "UA-123-45"
 Paginate = 7
 canonifyurls = true
+hasCJKLanguage = true
 
 [permalinks]
   post = "/:year/:month/:day/:slug/"
