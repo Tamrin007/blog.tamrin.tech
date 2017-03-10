@@ -8,8 +8,6 @@ thumbnailImage = "/images/2017/02/01/gopher.jpg"
 thumbnailImagePosition = "right"
 +++
 
-toc
-
 ## tl;dr
 
 ```sh
