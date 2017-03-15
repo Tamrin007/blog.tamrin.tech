@@ -24,7 +24,7 @@ canonifyurls = true
 hasCJKLanguage = true
 
 [permalinks]
-  post = "/:year/:month/:slug/:filename"
+  post = "/:year/:month/:filename"
 
 [taxonomies]
   tag = "tags"
