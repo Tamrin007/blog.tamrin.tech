@@ -1,3 +1,41 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+baseurl = "https://tamrin007.github.io/"
+languageCode = "ja-JP"
+title = "Tamrin007's Blog"
+# Define how many pages appear per site
+paginate = 10
+# Enable comments powered by Disqus by entering your disqus shortname
+disqusShortname = "tamrin007"
+# Enable gogle analytics by entering your tracking code
+googleAnalytics = ""
+theme = "hugo-minimalist-theme"
+# Remove this line if you use this theme for a real website.
+# It allows you to preview the theme within the exampleSite folder
+# with the hugo server command
+
+[params]
+    site_author = "Tamrin007"
+    site_description = "Blog."
+    location = "Kyoto"
+    # Link custom assets relative to /static
+    avatar = "https://s.gravatar.com/avatar/a735ff015345b3b510c6ea6535b349b7?s=160"
+    header_background = "img/desk.jpg"
+    header_title = "Tamrin007's Blog"
+    copyright = "Powered by [Hugo](http://gohugo.io)."
+    custom_css = []
+    custom_js  = []
+
+    # Enable gogle analytics by entering your tracking code
+    google_analytics = ""
+
+[social]
+    # Add your social network accounts to the profile section on the left
+    # by entering your username. The links to your account will be
+    # create automatically.
+    twitter   = "Tamrin007"
+    facebook  = ""
+    linkedin  = ""
+    behance   = ""
+    dribbble  = ""
+    instagram = ""
+    github    = "Tamrin007"
+    gplus     = ""
