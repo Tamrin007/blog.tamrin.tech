@@ -1,4 +1,4 @@
-baseURL = "https://tamrin.me"
+baseURL = "/"
 languageCode = "ja"
 title = "tamrin.me"
 theme = "kiss"
