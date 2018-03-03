@@ -3,7 +3,7 @@ languageCode = "ja"
 title = "tamrin.me"
 theme = "kiss"
 copyright = "&copy; <a href=\"https://github.com/tamrin007\">Tamrin007</a> 2018"
-disqusShortname = "tamrin007"
+disqusShortname = "Tamrin007"
 Paginate = 5
 enableRobotsTXT = true
 
@@ -22,6 +22,9 @@ page = "tamrin007"
 [params.social]
 twitter = "tamrin007"
 github = "tamrin007"
+
+[permalinks]
+post = "/:year/:month/:day/:filename"
 
 [taxonomies]
 tag ="tags"
