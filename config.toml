@@ -1,41 +1,31 @@
-baseurl = "/"
-languageCode = "ja-JP"
-title = "Tamrin007's Blog"
-# Define how many pages appear per site
-paginate = 10
-# Enable comments powered by Disqus by entering your disqus shortname
+baseURL = "https://tamrin.me"
+languageCode = "ja"
+title = "tamrin.me"
+theme = "kiss"
+copyright = "&copy; <a href=\"https://github.com/tamrin007\">Tamrin007</a> 2018"
 disqusShortname = "tamrin007"
-# Enable gogle analytics by entering your tracking code
-googleAnalytics = ""
-theme = "hugo-minimalist-theme"
-# Remove this line if you use this theme for a real website.
-# It allows you to preview the theme within the exampleSite folder
-# with the hugo server command
+Paginate = 5
+enableRobotsTXT = true
 
-[params]
-    site_author = "Tamrin007"
-    site_description = "Blog."
-    location = "Kyoto"
-    # Link custom assets relative to /static
-    avatar = "https://s.gravatar.com/avatar/a735ff015345b3b510c6ea6535b349b7?s=160"
-    header_background = "img/desk.jpg"
-    header_title = "Tamrin007's Blog"
-    copyright = "Powered by [Hugo](http://gohugo.io)."
-    custom_css = []
-    custom_js  = []
+[params.assets]
+customCSS = ["css/custom.css"]
 
-    # Enable gogle analytics by entering your tracking code
-    google_analytics = ""
+[params.info]
+enableSocial = true
+homeTitle = "tamrin.me"
+poweredby = false
+related = true
 
-[social]
-    # Add your social network accounts to the profile section on the left
-    # by entering your username. The links to your account will be
-    # create automatically.
-    twitter   = "Tamrin007"
-    facebook  = ""
-    linkedin  = ""
-    behance   = ""
-    dribbble  = ""
-    instagram = ""
-    github    = "Tamrin007"
-    gplus     = ""
+[params.opengraph.twitter]
+page = "tamrin007"
+
+[params.social]
+twitter = "tamrin007"
+github = "tamrin007"
+
+[taxonomies]
+tag ="tags"
+
+[blackfriday]
+hrefTargetBlank = true
+
