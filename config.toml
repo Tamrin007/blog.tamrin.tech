@@ -3,7 +3,6 @@ languageCode = "ja"
 title = "tamrin.me"
 theme = "kiss"
 copyright = "&copy; <a href=\"https://github.com/tamrin007\">Tamrin007</a> 2018"
-disqusShortname = "Tamrin007"
 Paginate = 5
 enableRobotsTXT = true
 
