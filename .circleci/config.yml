@@ -1,0 +1,57 @@
+version: 2
+jobs:
+    build:
+        filters:
+            branches:
+                ignore:
+                    - deploy
+        docker:
+            - image: felicianotech/docker-hugo:latest
+        steps:
+            - checkout
+            - run:
+                name: Set configuration of Git.
+                command: |
+                    git config --global user.name "Tamrin007"
+                    git config --global user.email "tamrin.bitterchococo@gmail.com"
+
+            - run:
+                name: Update theme.
+                command: |
+                    git submodule sync
+                    git submodule update --init --recursive
+
+            - run:
+                name: Delete old deploy branch.
+                command: |
+                    git push --delete origin deploy || echo "No old branch."
+
+            - run:
+                name: Checkout new deploy branch.
+                command: git checkout -b deploy
+
+            - run:
+                name: Build hugo.
+                command: hugo
+
+            - run:
+                name: Delete unused files.
+                command: ls | grep -vE 'public' | xargs rm -r
+
+            - run:
+                name: Move public directory to webroot.
+                command: |
+                    mv ./public/* ./
+                    rm -r ./public/
+            - run:
+                name: Deploy.
+                command: |
+                    git add .
+                    date "+%Y/%m/%d %H:%M:%S" | git commit -F -
+                    git push origin deploy
+
+workflows:
+    version: 2
+    build_and_deploy:
+        jobs:
+            - build
