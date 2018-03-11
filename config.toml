@@ -6,9 +6,6 @@ copyright = "&copy; <a href=\"https://github.com/tamrin007\">Tamrin007</a> 2018"
 Paginate = 5
 enableRobotsTXT = true
 
-[params.assets]
-customCSS = ["css/custom.css"]
-
 [params.info]
 enableSocial = true
 homeTitle = "tamrin.me"
