@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "ja"
-title = "tamrin.me"
+title = "たむりんのテクテク歩き"
 theme = "kiss"
 copyright = "&copy; <a href=\"https://github.com/tamrin007\">Tamrin007</a> 2018"
 Paginate = 5
