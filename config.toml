@@ -5,6 +5,7 @@ theme = "kiss"
 copyright = "&copy; <a href=\"https://github.com/tamrin007\">Tamrin007</a> 2018"
 Paginate = 5
 enableRobotsTXT = true
+hasCJKLanguage = true
 
 [params.info]
 enableSocial = true
