@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>たむりんのテクテク歩き</title>
+    <link>/</link>
+    <description>Recent content on たむりんのテクテク歩き</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/tamrin007&#34;&gt;Tamrin007&lt;/a&gt; 2018</copyright>
+    <lastBuildDate>Tue, 13 Mar 2018 22:36:21 +0900</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Azure で静的サイトを公開するときにやること</title>
+      <link>/posts/2018/03/13/hugo-on-azure/</link>
+      <pubDate>Tue, 13 Mar 2018 22:36:21 +0900</pubDate>
+      
+      <guid>/posts/2018/03/13/hugo-on-azure/</guid>
+      <description>こんにちは、Tamrin007 です。 このブログを公開するにあたって Microsoft Azure を利用したのでその手順や方法について書いていきます。 Hugo について まずはじ</description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>/posts/2018/03/03/about-me/</link>
+      <pubDate>Sat, 03 Mar 2018 23:03:35 +0900</pubDate>
+      
+      <guid>/posts/2018/03/03/about-me/</guid>
+      <description>{ &amp;quot;name&amp;quot;: &amp;quot;Tamrin007&amp;quot;, &amp;quot;MACH&amp;quot;: 18, &amp;quot;loves&amp;quot;: [&amp;quot;Microsoft&amp;quot;, &amp;quot;OSS&amp;quot;, &amp;quot;Web&amp;quot;, &amp;quot;Go&amp;quot;] }  </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Azure で静的サイトを公開するときにやること | たむりんのテクテク歩き</title>
+
+<meta property='og:title' content='Azure で静的サイトを公開するときにやること - たむりんのテクテク歩き'>
+<meta property='og:description' content='こんにちは、Tamrin007 です。 このブログを公開するにあたって Microsoft Azure を利用したのでその手順や方法について書いていきます。 Hugo について まずはじ'>
+<meta property='og:url' content='/posts/2018/03/13/hugo-on-azure/'>
+<meta property='og:site_name' content='たむりんのテクテク歩き'>
+<meta property='og:type' content='article'><meta property='og:image' content='/images/2018/03/13/structure.png'><meta property='article:section' content='Posts'><meta property='article:tag' content='Azure'><meta property='article:tag' content='Azure App Services'><meta property='article:tag' content='Azure CDN'><meta property='article:tag' content='Hugo'><meta property='article:published_time' content='2018-03-13T22:36:21&#43;09:00'/><meta property='article:modified_time' content='2018-03-13T22:36:21&#43;09:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:site' content='@tamrin007'><meta name='twitter:creator' content='@tamrin007'>
+<link rel="preload" href="/css/style.css" as="style">
+<link rel="stylesheet" href="/css/style.css"><link rel="preload" href="/images/favicon.ico" as="image">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="/"><h1 class="title is-4">たむりんのテクテク歩き</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"><a class="level-item" href='https://github.com/tamrin007' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" href='https://twitter.com/tamrin007' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+    
+  </svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle">March 13, 2018</h2>
+    <h1 class="title">Azure で静的サイトを公開するときにやること</h1>
+    <div class="subtitle">
+      
+      
+<a class="subtitle" href="/tags/azure">#Azure</a>
+
+
+
+  
+  | <a class="subtitle" href="/tags/azure-app-services">#Azure App Services</a>
+  
+  | <a class="subtitle" href="/tags/azure-cdn">#Azure CDN</a>
+  
+  | <a class="subtitle" href="/tags/hugo">#Hugo</a>
+  
+
+      
+    </div>
+    
+    <div class="content">
+      
+
+<p>こんにちは、Tamrin007 です。</p>
+
+<p>このブログを公開するにあたって Microsoft Azure を利用したのでその手順や方法について書いていきます。</p>
+
+<h2 id="hugo-について">Hugo について</h2>
+
+<p>まずはじめに、このブログは静的サイトとして作成しています。つまりデータベース等から記事を取得しているわけではなく、ローカルの Markdown ファイルを変換して静的な HTML ファイルを書き出しています。</p>
+
+<p>利用しているのは Go 製の <a href="https://gohugo.io" target="_blank">Hugo</a> という静的サイトジェネレータです。</p>
+
+<p><a href="https://gohugo.io" target="_blank">The world’s fastest framework for building websites | Hugo</a></p>
+
+<p>今回は、</p>
+
+<ul>
+<li>Go 標準のテンプレートエンジンが利用されているので、Go の経験が活かせる</li>
+<li>記事のビルド（HTML ファイルの生成）が高速</li>
+<li>クロスプラットフォームで動作するのでマシンを変えてもすぐに移行できる</li>
+</ul>
+
+<p>といった特長から採用しました。（後ろの 2 つは Go の利点と合致しますね）</p>
+
+<p>Hugo についてはここでは割愛しますので、インストール方法などは上記の公式サイトをご覧ください。</p>
+
+<h2 id="azure-での静的サイトのホスティング">Azure での静的サイトのホスティング</h2>
+
+<p>今回は Microsoft のクラウドサービス Azure を利用します。こちらは特に明確な理由があるわけではなく</p>
+
+<p><strong>将来的に仕事で Azure に関わる可能性が高く、慣れておくため</strong></p>
+
+<p>ぐらいの理由です。</p>
+
+<p>（経験で言うと AWS や GCP、手軽さで言うと GitHub Pages や Netlify の方が…モニョモニョ）</p>
+
+<p>Azure で静的サイトをホスティングする方法は主に以下の 2 通りのようです。</p>
+
+<ul>
+<li>Azure Blob Storage を利用する
+
+<ul>
+<li>+ Azure Functions を利用する</li>
+</ul></li>
+<li>Azure Web Apps を利用する</li>
+</ul>
+
+<p>それぞれについて見ていきましょう。</p>
+
+<h3 id="azure-blob-storage">Azure Blob Storage</h3>
+
+<p>こちらは Azure のオブジェクトストレージです。AWS で言うと S3 ですね。</p>
+
+<p>基本機能はその名の通り「ストレージ」ですが、配置されたコンテンツへの HTTP アクセスを用意しているようです。</p>
+
+<p>こちらのドキュメントに詳しく記載されています。</p>
+
+<p><a href="https://docs.microsoft.com/ja-jp/azure/architecture/patterns/static-content-hosting" target="_blank">静的コンテンツ ホスティング | Microsoft Docs</a></p>
+
+<p>コストがかなり抑えられる一方、不便な点もいくつかあるようで、こんな記事があります。</p>
+
+<p><a href="https://qiita.com/mentholnodoame/items/eae88fbd9cf409429f98" target="_blank">Azure BlobでのWebサイト公開がつらい - Qiita</a></p>
+
+<h3 id="azure-app-service-の-web-apps">Azure App Service の Web Apps</h3>
+
+<p>こちらは Web アプリケーションをホストするためのサービスで、静的コンテンツのホスティングも提供されています。</p>
+
+<p>元が Web アプリケーション用のサービスということもあり、CI/CD 機能なども統合されています。</p>
+
+<p>Blob Storage よりも使い勝手が良さそうなので、今回はこちらを採用しました。</p>
+
+<p>（実際に上記 <a href="https://qiita.com/mentholnodoame/items/eae88fbd9cf409429f98" target="_blank">Qiita 記事</a>の問題は解決されます）</p>
+
+<p>実際の構築手順は公式のチュートリアルがあります。</p>
+
+<p><a href="https://docs.microsoft.com/ja-jp/azure/app-service/app-service-web-get-started-html" target="_blank">Azure で静的な HTML Web アプリを作成する | Microsoft Docs</a></p>
+
+<p>ただしこのチュートリアルでは Azure CLI というツールを使用しているため、少しハードルが高い…という方のために、簡単に Azure Portal での操作方法も記載しておきます。</p>
+
+<ol>
+<li><a href="https://portal.azure.com" target="_blank">Azure Portal</a> にアクセス</li>
+<li>[リソースの作成] をクリック</li>
+<li>[Web App] を探してクリック</li>
+<li>[アプリ名]、[リソースグループ]、[プラン]、[OS] を入力・選択
+
+<ul>
+<li>プランは F1 を選ぶと 0 円で利用できます</li>
+<li>Linux を選ぶとインデックスページの問題が発生するようです、パフォーマンスの上でも Windows を選んだほうが利点が多いでしょう</li>
+</ul></li>
+<li>しばらくするとダッシュボードに作成したリソースが表示されます</li>
+</ol>
+
+<p>リソース作成の参考画像</p>
+
+<p><img src="/images/2018/03/13/app-service-plan.png" alt="リソース作成の参考画像" title="リソース作成の参考画像" /></p>
+
+<h3 id="azure-web-apps-に-html-をアップロードする">Azure Web Apps に HTML をアップロードする</h3>
+
+<p>まずは簡単に始めるために、 FTPS を利用します。（GitHub 連携などができる方はやっちゃっていいです）</p>
+
+<ol>
+<li>App Service の画面で [デプロイ資格情報]にアクセス</li>
+<li>[FTP/デプロイ ユーザー名]、[パスワード]を入力</li>
+<li>[概要] にアクセスし、表示されている FTPS の URL を確認</li>
+<li>適当な FTPS クライアントでアクセスし、<code>D:\home\site\wwwroot</code> というパスに HTML ファイルをアップロード
+
+<ul>
+<li>私は <a href="https://cyberduck.io/" target="_blank">Cyberduck</a> を使用しました</li>
+</ul></li>
+<li>[概要] に記載されている自サイトの URL へアクセスし、確認</li>
+</ol>
+
+<p>以上です。</p>
+
+<h2 id="web-apps-にカスタムドメインを割り当て-https-でアクセスできるようにする">Web Apps にカスタムドメインを割り当て、HTTPS でアクセスできるようにする</h2>
+
+<p>D1 Shared プランであればカスタムドメインが、B1 以上であれば SSL サポートが利用できますが、費用がそれなりに嵩みます。</p>
+
+<p>そこで今回は Azure CDN を利用し、カスタムドメインの割り当てと HTTPS でのアクセスを可能にします。</p>
+
+<h3 id="azure-cdn">Azure CDN</h3>
+
+<p>CDN は静的な Web コンテンツをキャッシュし、ユーザーへのコンテンツ配信を早め、Web サーバーの負荷を低減させることもできる仕組みです。</p>
+
+<p>App Service との組み合わせ方はこちらのチュートリアルが参考になります。</p>
+
+<p><a href="https://docs.microsoft.com/ja-jp/azure/app-service/app-service-web-tutorial-content-delivery-network" target="_blank">Azure App Service に CDN を追加する | Microsoft Docs</a></p>
+
+<p><strong>ただし、プランに注意してください</strong></p>
+
+<p>Standard Akamai では [カスタム ドメイン HTTPS] が利用できません。</p>
+
+<p>また、Standard Verizon では [キャッシュ/ヘッダーの設定 ( ルール エンジンを使用)] が利用できず、HTTP アクセスの HTTPS への書き換えなどができなくなります。</p>
+
+<p>利用したい場合は Premium Verizon を選んでください。</p>
+
+<p><a href="https://docs.microsoft.com/ja-jp/azure/cdn/cdn-overview#azure-cdn-features" target="_blank">Azure CDN の概要 | Microsoft Docs</a></p>
+
+<h3 id="azure-cdn-にカスタムドメインを割り当て-https-を有効にする">Azure CDN にカスタムドメインを割り当て、HTTPS を有効にする</h3>
+
+<p>こちらもチュートリアルがあります。（公式チュートリアルが優秀ですね）</p>
+
+<p><a href="https://docs.microsoft.com/ja-jp/azure/cdn/cdn-map-content-to-custom-domain" target="_blank">カスタム ドメインを CDN エンドポイントに追加する | Microsoft Docs</a></p>
+
+<p><a href="https://docs.microsoft.com/ja-jp/azure/cdn/cdn-custom-ssl" target="_blank">Azure Content Delivery Network のカスタム ドメインで HTTPS を構成する | Microsoft Docs</a></p>
+
+<p><strong>HTTPS を有効にする際はメールを受け取れるか注意してください</strong></p>
+
+<p>HTTPS を有効にすると DigiCert という認証局から Whois 情報に載っているメールアドレスと、以下のメールアドレス宛に所有確認のメールが来ます。</p>
+
+<ul>
+<li>admin@&lt;custom-domain&gt;</li>
+<li>administrator@&lt;custom-domain&gt;</li>
+<li>webmaster@&lt;custom-domain&gt;</li>
+<li>hostmaster@&lt;custom-domain&gt;</li>
+<li>postmaster@&lt;custom-domain&gt;</li>
+</ul>
+
+<p>転送設定をするなど、確実に受け取れるようにしましょう。</p>
+
+<p>メールを受け取ったらフォームの指示に従い認証を行います。しばらくすると晴れて HTTPS でアクセスできるようになります。</p>
+
+<h3 id="azure-cdn-のルールを設定する">Azure CDN のルールを設定する</h3>
+
+<p>Premium Verizon を選んでいる場合は [エンドポイント] の [高度な機能]、[管理] とアクセスすることで CDN のルールを設定できます。</p>
+
+<p>例えば HTTP によるアクセスを HTTPS にリダイレクトしたい場合は、次のように設定します。</p>
+
+<p><img src="/images/2018/03/13/redirect-rule.png" alt="HTTPS へのリダイレクトルール" title="HTTPS へのリダイレクトルール" /></p>
+
+<ul>
+<li>Source: (.*)</li>
+<li>Destination: https://%{host}/$1</li>
+</ul>
+
+<p>これで常時 HTTPS でアクセスできるようになっているはずです。</p>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>今回の構成をまとめると以下になります。</p>
+
+<p><img src="/images/2018/03/13/structure.png" alt="構成図" title="構成図" /></p>
+
+<p>次回は GitHub を用いた継続的デプロイについて書こうと思います。</p>
+
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/tamrin007">Tamrin007</a> 2018</p>
+    
+  </div>
+</section>
+
+</body>
+</html>
+
