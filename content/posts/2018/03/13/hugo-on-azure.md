@@ -3,7 +3,7 @@ title: "Azure で静的サイトを公開するときにやること"
 date: 2018-03-13T22:36:21+09:00
 draft: false
 tags: ["Azure", "Azure App Services", "Azure CDN", "Hugo"]
-cover: images/2018/03/03/icon.png
+cover: /images/2018/03/13/structure.png
 ---
 
 こんにちは、Tamrin007 です。
